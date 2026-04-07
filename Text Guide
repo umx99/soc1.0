@@ -1,0 +1,26 @@
+Place the files in following folders
+
+Files:
+Make sure your files are organized like this in your src/main/java/com/soc/siem folder:
+SiemBackendApplication.java (The "Brain")
+
+model/LogEntry.java (The Data Structure)
+repository/LogRepository.java (The Database Link)
+service/SyslogListener.java (The UDP "Ear")
+controller/SocController.java (The Web API)
+
+Place the index file:
+src/main/resources/static/index.html
+
+Run:
+Start the Java App: Stop the current process (Ctrl+C).
+Run: mvn spring-boot:run (or click the Play button in VSCODE).
+Open the Browser: Go to http://localhost:8080/.
+
+
+Testing:
+Send an "Attack": Open your PowerShell window and send a log that contains the word "attack":
+PowerShell
+$u = New-Object System.Net.Sockets.UdpClient; $u.Connect("127.0.0.1", 10514)
+$p = [System.Text.Encoding]::ASCII.GetBytes("SECURITY ALERT: SQL Injection attack detected on login form")
+$u.Send($p, $p.Length); $u.Close()
